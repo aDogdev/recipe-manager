@@ -1,5 +1,6 @@
 import React from "react";
 import RecipeTitle from "./RecipeTitle";
+import IngredientList from "./IngredientList";
 import "./index.css";
 
 const recipe = {
@@ -22,6 +23,7 @@ function App() {
     <article>
       <h1>Recipe Manager</h1>
       <RecipeTitle title={recipe.title} feedback={recipe.feedback} />
+      <IngredientList ingredients={recipe.ingredients} />
     </article>
   );
 }
