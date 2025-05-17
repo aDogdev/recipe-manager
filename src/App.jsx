@@ -21,7 +21,7 @@ function App() {
   return (
     <article>
       <h1>Recipe Manager</h1>
-      <RecipeTitle title={recipe.title} />
+      <RecipeTitle title={recipe.title} feedback={recipe.feedback} />
     </article>
   );
 }
