@@ -1,7 +1,11 @@
 import React from "react";
 
-function RecipeTitle() {
-  const title = "Mashed potatoes";
-  return <h2>{title}</h2>;
+function RecipeTitle(props) {
+  return (
+    <section>
+      <h2>{props.title}</h2>
+    </section>
+  );
 }
+
 export default RecipeTitle;
