@@ -31,12 +31,23 @@ const initialRecipe = {
 
 function App() {
   const [recipe, setRecipe] = useState(initialRecipe);
+
+  function ingredientClick(index) {
+    const updatedRecipe = { ...recipe };
+    updatedRecipe.ingredients[index].prepared =
+      !updatedRecipe.ingredients[index].prepared;
+    setRecipe(updatedRecipe);
+  }
+
   return (
     <article>
       <h1>Recipe Manager</h1>
       <RecipeTitle title={recipe.title} feedback={recipe.feedback} />
       <h2>Ingredients</h2>
-      <IngredientList ingredients={recipe.ingredients} />
+      <IngredientList
+        ingredients={recipe.ingredients}
+        onClick={ingredientClick}
+      />
       <h2>Instructions</h2>
       <InstructionList instructions={recipe.instructions} />
     </article>
