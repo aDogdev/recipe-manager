@@ -21,6 +21,7 @@ function IngredientList({ recipe, handleIngredient }) {
 
   return (
     <>
+      <h2>Ingredients</h2>
       <ul className="ingredient-grid">{ingredientListItems}</ul>
       {prepared ? (
         <h2 className="status-badge done">Prep work done!</h2>

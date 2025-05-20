@@ -67,7 +67,6 @@ function App() {
     <article>
       <h1>Recipe Manager</h1>
       <RecipeTitle title={recipe.title} feedback={recipe.feedback} />
-      <h2>Ingredients</h2>
       <IngredientList recipe={recipe} handleIngredient={handleIngredient} />
       <InstructionList recipe={recipe} handleInstruction={handleInstruction} />
     </article>
