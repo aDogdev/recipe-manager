@@ -49,6 +49,17 @@ function App() {
     setProgress((completed / recipe.instructions.length) * 100);
   }, [recipe]);
 
+  useEffect(() => {
+    const savedRecipe = localStorage.getItem("recipe");
+    if (savedRecipe) {
+      setRecipe(JSON.parse(savedRecipe));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("recipe", JSON.stringify(recipe));
+  }, [recipe]);
+
   function handleIngredient(index) {
     const updatedRecipe = { ...recipe };
     updatedRecipe.ingredients[index].prepared =
