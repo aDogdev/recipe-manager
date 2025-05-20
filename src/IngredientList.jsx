@@ -1,13 +1,13 @@
 import React from "react";
 import "./IngredientList.css";
 
-function IngredientList(props) {
-  const ingredientListItems = props.ingredients.map((ingredient, index) => {
+function IngredientList({ ingredients, handleIngredient }) {
+  const ingredientListItems = ingredients.map((ingredient, index) => {
     return (
       <li
         key={index}
         className={ingredient.prepared ? "prepared" : ""}
-        onClick={() => props.onClick(index)}
+        onClick={() => handleIngredient(index)}
       >
         {ingredient.name}
       </li>

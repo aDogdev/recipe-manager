@@ -18,31 +18,50 @@ const initialRecipe = {
     { name: "Pepper", prepared: true },
   ],
   instructions: [
-    "Add cut potatoes to a pot of heavily salted water.",
-    "Bring the pot to a boil.",
-    "Boil the potatoes until they are tender when pierced with a fork, approximately 15-20 minutes.",
-    "Drain the potatoes.",
-    "Put the potatoes back in the pot.",
-    "Add butter, cream, salt, and pepper to taste.",
-    "Make mashed potatoes.",
-    "Re-season and add butter and cream to taste.",
+    {
+      text: "Add cut potatoes to a pot of heavily salted water.",
+      completed: false,
+    },
+    { text: "Bring the pot to a boil.", completed: false },
+    {
+      text: "Boil the potatoes until they are tender when pierced with a fork, approximately 15-20 minutes.",
+      completed: false,
+    },
+    { text: "Drain the potatoes.", completed: false },
+    { text: "Put the potatoes back in the pot.", completed: false },
+    { text: "Add butter, cream, salt, and pepper to taste.", completed: false },
+    { text: "Make mashed potatoes.", completed: false },
+    { text: "Re-season and add butter and cream to taste.", completed: false },
   ],
 };
 
 function App() {
   const [recipe, setRecipe] = useState(initialRecipe);
   const [prepared, setPrepared] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     setPrepared(recipe.ingredients.every((i) => i.prepared));
   }, [recipe]);
 
-  function ingredientClick(index) {
+  useEffect(() => {
+    const completed = recipe.instructions.filter((i) => i.completed).length;
+    setProgress((completed / recipe.instructions.length) * 100);
+  }, [recipe]);
+
+  function handleIngredient(index) {
     const updatedRecipe = { ...recipe };
     updatedRecipe.ingredients[index].prepared =
       !updatedRecipe.ingredients[index].prepared;
     setRecipe(updatedRecipe);
   }
+
+  const handleInstruction = (index) => {
+    const updatedRecipe = { ...recipe };
+    updatedRecipe.instructions[index].completed =
+      !updatedRecipe.instructions[index].completed;
+    setRecipe(updatedRecipe);
+  };
 
   return (
     <article>
@@ -51,11 +70,17 @@ function App() {
       <h2>Ingredients</h2>
       <IngredientList
         ingredients={recipe.ingredients}
-        onClick={ingredientClick}
+        handleIngredient={handleIngredient}
       />
       {prepared ? <h2>Prep work done!</h2> : <h2>Just keep chopping.</h2>}
       <h2>Instructions</h2>
-      <InstructionList instructions={recipe.instructions} />
+      <InstructionList
+        instructions={recipe.instructions}
+        handleInstruction={handleInstruction}
+      />
+      <div className="progress-bar">
+        <div style={{ width: `${progress}%` }}></div>
+      </div>
     </article>
   );
 }

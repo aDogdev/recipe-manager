@@ -1,11 +1,15 @@
 import React from "react";
 import "./InstructionList.css";
 
-function InstructionList(props) {
-  const InstructionListItems = props.instructions.map((instruction, index) => {
+function InstructionList({ instructions, handleInstruction }) {
+  const InstructionListItems = instructions.map((instruction, index) => {
     return (
-      <li key={index}>
-        {instruction}
+      <li
+        key={index}
+        className={instruction.completed ? "completed" : ""}
+        onClick={() => handleInstruction(index)}
+      >
+        {instruction.text}
       </li>
     );
   });
