@@ -37,12 +37,6 @@ const initialRecipe = {
 
 function App() {
   const [recipe, setRecipe] = useState(initialRecipe);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const completed = recipe.instructions.filter((i) => i.completed).length;
-    setProgress((completed / recipe.instructions.length) * 100);
-  }, [recipe]);
 
   useEffect(() => {
     const savedRecipe = localStorage.getItem("recipe");
@@ -75,15 +69,7 @@ function App() {
       <RecipeTitle title={recipe.title} feedback={recipe.feedback} />
       <h2>Ingredients</h2>
       <IngredientList recipe={recipe} handleIngredient={handleIngredient} />
-
-      <h2>Instructions</h2>
-      <InstructionList
-        instructions={recipe.instructions}
-        handleInstruction={handleInstruction}
-      />
-      <div className="progress-bar">
-        <div style={{ width: `${progress}%` }}></div>
-      </div>
+      <InstructionList recipe={recipe} handleInstruction={handleInstruction} />
     </article>
   );
 }
