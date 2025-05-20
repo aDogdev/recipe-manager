@@ -1,3 +1,11 @@
+.recipe-header {
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 2rem;
+}
+
 .red {
   color: red;
 }
