@@ -37,12 +37,7 @@ const initialRecipe = {
 
 function App() {
   const [recipe, setRecipe] = useState(initialRecipe);
-  const [prepared, setPrepared] = useState(false);
   const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    setPrepared(recipe.ingredients.every((i) => i.prepared));
-  }, [recipe]);
 
   useEffect(() => {
     const completed = recipe.instructions.filter((i) => i.completed).length;
@@ -79,11 +74,8 @@ function App() {
       <h1>Recipe Manager</h1>
       <RecipeTitle title={recipe.title} feedback={recipe.feedback} />
       <h2>Ingredients</h2>
-      <IngredientList
-        ingredients={recipe.ingredients}
-        handleIngredient={handleIngredient}
-      />
-      {prepared ? <h2>Prep work done!</h2> : <h2>Just keep chopping.</h2>}
+      <IngredientList recipe={recipe} handleIngredient={handleIngredient} />
+
       <h2>Instructions</h2>
       <InstructionList
         instructions={recipe.instructions}
