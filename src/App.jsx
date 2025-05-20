@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import RecipeTitle from "./RecipeTitle";
 import IngredientList from "./IngredientList";
 import InstructionList from "./InstructionList";
 import "./index.css";
 
-const recipe = {
+const initialRecipe = {
   title: "Mashed potatoes",
   feedback: {
     rating: 4.8,
@@ -30,6 +30,7 @@ const recipe = {
 };
 
 function App() {
+  const [recipe, setRecipe] = useState(initialRecipe);
   return (
     <article>
       <h1>Recipe Manager</h1>
