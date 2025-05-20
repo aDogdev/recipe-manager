@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecipeTitle from "./RecipeTitle";
 import IngredientList from "./IngredientList";
 import InstructionList from "./InstructionList";
@@ -31,6 +31,11 @@ const initialRecipe = {
 
 function App() {
   const [recipe, setRecipe] = useState(initialRecipe);
+  const [prepared, setPrepared] = useState(false);
+
+  useEffect(() => {
+    setPrepared(recipe.ingredients.every((i) => i.prepared));
+  }, [recipe]);
 
   function ingredientClick(index) {
     const updatedRecipe = { ...recipe };
@@ -48,6 +53,7 @@ function App() {
         ingredients={recipe.ingredients}
         onClick={ingredientClick}
       />
+      {prepared ? <h2>Prep work done!</h2> : <h2>Just keep chopping.</h2>}
       <h2>Instructions</h2>
       <InstructionList instructions={recipe.instructions} />
     </article>
